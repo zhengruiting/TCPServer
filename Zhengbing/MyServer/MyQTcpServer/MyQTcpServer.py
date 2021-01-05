@@ -14,16 +14,20 @@ class MyQTcpServer(QTcpServer):
             print("连接正在运行")
         else:
             self.listen(QHostAddress(self.ip), self.port)
-        print("aaaaaaaaaaaaaa")
     def handle_msgSingle(self,msg):
         self.msgSingle4.emit(msg)
-
     def incomingConnection(self,sip_voidptr):
         print("新的连接进入")
         self.mythread = MyThrd(sip_voidptr)
-        # self.msgSingle4.connect(self.mythread.handle_write1)
-        self.mythread.finished.connect(self.mythread.deleteLater)
+        self.msgSingle4.connect(self.mythread.handle_write1)
+        self.msgSingle4.connect(lambda :print("信号触发0000000000"))
+        self.mythread.finished.connect(self.dealDisconnect)
         self.mythread.start()
+    def dealDisconnect(self):
+        print("线程退出00000000000")
+        self.mythread.deleteLater()
+        self.mythread.exit()
+
 
 
 if __name__ == '__main__':

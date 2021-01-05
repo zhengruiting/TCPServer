@@ -1,7 +1,6 @@
 from PyQt5.QtCore import QThread, Qt, pyqtSignal
 from PyQt5.QtNetwork import QTcpSocket
 
-from Zhengbing.MyServer import dealmm
 socketList = []
 
 def dealRecvMsgE(tcpSocket):
@@ -37,8 +36,8 @@ class MyThrd(QThread):
             self.tcpSocket.disconnected.connect(lambda: self.dealDisconnect(self.tcpSocket), Qt.DirectConnection)
             socketList.append(self.tcpSocket)
 
-            # self.msgSingle.connect(self.handle_accept_msg)
-
+            self.msgSingle.connect(self.handle_accept_msg)
+            self.finished.connect(self.deleteLater)
         else:
             print("出错了")
         # 因为涉及到线程，这里需要执行这个函数，循环监听(Qt的事件循环)
@@ -65,9 +64,11 @@ class MyThrd(QThread):
         print("主机:" + ip + ";端口：" + port + "断开连接")
         tcpSocket.disconnectFromHost()  # 断开主机
         tcpSocket.close()  # 这个关闭连接
-
         socketList.remove(tcpSocket)
-        self.finished.connect(self.deleteLater)
+        print("线程退出")
+        self.exit()
+
+
 
 
 if __name__ == '__main__':

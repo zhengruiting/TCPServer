@@ -6,7 +6,9 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from Zhengbing.MyServer.mySource import interface
 from  Zhengbing.MyServer.MyQTcpServer.MyQTcpServer import MyQTcpServer
+# address_server = [("192.168.1.105",8888),("127.0.0.1",8888)]
 address_server = [("127.0.0.1",8888)]
+serverList=[]
 class HostClientWidget(QMainWindow):
     msgSingle = pyqtSignal(str)
     def __init__(self):
@@ -20,15 +22,16 @@ class HostClientWidget(QMainWindow):
         self.ui.pushButton.clicked.connect(self.mm)
         for ip,port in address_server:
             self.my_qtcpserver = MyQTcpServer(ip,port)
-        # self.msgSingle.connect(self.my_qtcpserver.handle_msgSingle)
+            self.msgSingle.connect(self.my_qtcpserver.handle_msgSingle)
+            serverList.append(self.my_qtcpserver)
         address_server.clear()
 
     def mm(self):
         msg = self.ui.lineEdit.text()
-        # self.msgSingle.emit(msg)
+        self.msgSingle.emit(msg)
 
-        dealmm.mystr = msg
-        dealmm.myhh.msgS.emit()
+        # dealmm.mystr = msg
+        # dealmm.myhh.msgS.emit()
 
 
 if __name__ == '__main__':
