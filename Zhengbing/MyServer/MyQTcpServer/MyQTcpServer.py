@@ -20,11 +20,9 @@ class MyQTcpServer(QTcpServer):
         print("新的连接进入")
         self.mythread = MyThrd(sip_voidptr)
         self.msgSingle4.connect(self.mythread.handle_write1)
-        self.msgSingle4.connect(lambda :print("信号触发0000000000"))
         self.mythread.finished.connect(self.dealDisconnect)
         self.mythread.start()
     def dealDisconnect(self):
-        print("线程退出00000000000")
         self.mythread.deleteLater()
         self.mythread.exit()
 

@@ -28,10 +28,9 @@ class MyThrd(QThread):
 
     def run(self):
         self.tcpSocket = QTcpSocket()
-        # print("处理线程", QThread.currentThread())
         if self.tcpSocket.setSocketDescriptor(self.sock):
             # QTcpSocket缓存接收到新的数据时触发readyRead
-            self.tcpSocket.readyRead.connect(lambda: self.dealRecvMsgE(self.tcpSocket),Qt.DirectConnection)
+            self.tcpSocket.readyRead.connect(lambda:dealRecvMsgE(self.tcpSocket),Qt.DirectConnection)
             # 断开连接时
             self.tcpSocket.disconnected.connect(lambda: self.dealDisconnect(self.tcpSocket), Qt.DirectConnection)
             socketList.append(self.tcpSocket)
@@ -51,12 +50,9 @@ class MyThrd(QThread):
         print("连接时套接字",socketList)
         self.msg = msg
         self.msgSingle.emit(msg)
-    def dealRecvMsgE(self,tcpSocket):
-        readData = tcpSocket.readAll()
-        print(readData)
-        # if dealmm.mystr != None:
-        #     tcpSocket.write(dealmm.mystr.encode("utf-8"))
-
+    # def dealRecvMsgE(self,tcpSocket):
+    #     readData = tcpSocket.readAll()
+    #     print(readData)
     # 断开连接
     def dealDisconnect(self,tcpSocket):
         ip = tcpSocket.peerAddress().toString()
@@ -66,7 +62,7 @@ class MyThrd(QThread):
         tcpSocket.close()  # 这个关闭连接
         socketList.remove(tcpSocket)
         print("线程退出")
-        self.exit()
+        self.exit()#退出这一个线程
 
 
 

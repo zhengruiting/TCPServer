@@ -18,8 +18,8 @@ class HostClientWidget(QMainWindow):
         # 1.将生成的ui文件转为py文件
         self.ui = interface.Ui_MainWindow()
         self.ui.setupUi(self)
-        # self.ui.pushButton.clicked.connect(lambda :self.msgSingle.emit(self.ui.lineEdit.text()))
-        self.ui.pushButton.clicked.connect(self.mm)
+        self.ui.pushButton.clicked.connect(lambda :self.msgSingle.emit(self.ui.lineEdit.text()))
+        # self.ui.pushButton.clicked.connect(self.mm)
         for ip,port in address_server:
             self.my_qtcpserver = MyQTcpServer(ip,port)
             self.msgSingle.connect(self.my_qtcpserver.handle_msgSingle)
@@ -29,9 +29,6 @@ class HostClientWidget(QMainWindow):
     def mm(self):
         msg = self.ui.lineEdit.text()
         self.msgSingle.emit(msg)
-
-        # dealmm.mystr = msg
-        # dealmm.myhh.msgS.emit()
 
 
 if __name__ == '__main__':
