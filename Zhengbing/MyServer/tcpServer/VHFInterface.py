@@ -1,7 +1,6 @@
 import sys
 
 from Zhengbing.MyServer import dealmm
-
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from Zhengbing.MyServer.mySource import interface
