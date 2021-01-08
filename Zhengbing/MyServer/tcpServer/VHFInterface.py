@@ -16,7 +16,6 @@ class HostClientWidget(QMainWindow):
         self.ui = interface.Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(lambda :self.msgSingle.emit(self.ui.lineEdit.text()))
-        # self.ui.pushButton.clicked.connect(self.mm)
         for ip,port in address_server:
             self.my_qtcpserver = MyQTcpServer(ip,port)
             self.msgSingle.connect(self.my_qtcpserver.handle_msgSingle)

@@ -96,28 +96,47 @@
 #折旧年限
 
 
-class Data_test2(object):
-    day=0
-    month=0
-    year=0
-    def __init__(self,year=0,month=0,day=0):
-        self.day=day
-        self.month=month
-        self.year=year
-    @classmethod
-    def get_date(cls,data_as_string):
+# class Data_test2(object):
+#     day=0
+#     month=0
+#     year=0
+#     def __init__(self,year=0,month=0,day=0):
+#         self.day=day
+#         self.month=month
+#         self.year=year
+#     @classmethod
+#     def get_date(cls,data_as_string):
+#
+#         #这里第一个参数是cls， 表示调用当前的类名
+#
+#         year,month,day=map(int,data_as_string.split('-'))
+#         date1=cls(year,month,day)     #返回的是一个初始化后的类
+#         return date1
+#
+#     def out_date(self):
+#         print("year :",self.year)
+#         print("month :",self.month)
+#         print("day :",self.day)
+#
+# r=Data_test2.get_date("2020-1-1")
+#
+# r.out_date()
 
-        #这里第一个参数是cls， 表示调用当前的类名
 
-        year,month,day=map(int,data_as_string.split('-'))
-        date1=cls(year,month,day)     #返回的是一个初始化后的类
-        return date1
 
-    def out_date(self):
-        print("year :",self.year)
-        print("month :",self.month)
-        print("day :",self.day)
 
-r=Data_test2.get_date("2020-1-1")
 
-r.out_date()
+# num = int(input("输入一个数字: "))
+# if (num % 2) == 0:
+#     print("{0} 是偶数".format(num))
+# else:
+#     print("{0} 是奇数".format(num))
+
+a = int(input("输入第一个数字: "))
+b = int(input("输入第二个数字: "))
+if a>b:
+    print("最大的数:",a)
+elif a == b:
+    print("相等")
+else:
+    print("最大的数:",b)
